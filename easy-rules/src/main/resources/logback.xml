@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <contextName>easy-rules</contextName>
+
+  <if condition='isNull("appname")'>
+    <then>
+      <property name="appname" value="easy-rules" />
+    </then>
+  </if>
+
+  <!-- 尝试获取catalina.home，在tomcat启动脚本中默认就会设置 -->
+  <if condition='isNull("LOG_HOME")'>
+    <then>
+      <if condition='!isNull("catalina.home")'>
+        <then>
+          <property name="LOG_HOME" value="${catalina.home}/logs/${appname}" />
+        </then>
+        <else>
+          <property name="LOG_HOME" value="../logs/${appname}" />
+        </else>
+      </if>
+    </then>
+  </if>
+
+  <!-- 根据环境判断要加载的logback，如果没有指定profile，或者profile为dev，则为开发环境 -->
+  <if condition='isNull("profile") || property("profile").equals("dev")'>
+    <then>
+      <include resource="logback-dev.xml" />
+    </then>
+    <else>
+      <include resource="logback-default.xml" />
+    </else>
+  </if>
+
+</configuration> 
