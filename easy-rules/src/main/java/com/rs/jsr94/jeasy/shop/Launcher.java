@@ -24,7 +24,7 @@ public class Launcher {
                 .priority(1)
                 .when("person.age > 18")
                 .then("person.setAdult(true)");
-        MVELRule alcoholRule = MVELRuleFactory.createRuleFrom(new FileReader("/Users/rongsheng/gitsrc/jsr94/easy-rules/src/main/java/com/rs/jsr94/jeasy/shop/alcohol-rule.yml"));
+        MVELRule alcoholRule = MVELRuleFactory.createRuleFrom(new FileReader("easy-rules/src/main/java/com/rs/jsr94/jeasy/shop/alcohol-rule.yml"));
 
         // create a rule set
         Rules rules = new Rules();
